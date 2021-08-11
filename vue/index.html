@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue.js Components</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+
+    <div class="student-list-form" id="student-list">
+        <table>
+            <button v-if="editing" @click="doEdit(false)" class="delete-button">
+                Список студентов
+            </button>
+            <button v-else @click="doEdit(true)" class="add-button">
+                Добавить
+            </button>
+        </table>
+        <div v-if="editing" class="add-form">
+            <h1 class="header">Список студентов</h1>
+            <p>Добавить студента</p>
+            <hr>
+
+            <label for="name"><b>Имя</b></label>
+            <input v-model="name" placeholder="Введите имя студента">
+
+            <label for="surname"><b>Фамилия</b></label>
+            <input v-model="surname" placeholder="Введите фамилию студента">
+
+            <label for="course"><b>Курс</b></label>
+            <input v-model="course" placeholder="Введите курс">
+
+            <button class="save-button" @click="push(name, surname, course)" type="button"><b>Добавить студента</b></button>
+        </div>
+
+        <div v-if="!editing" class="stud-list">
+                <hr>
+                <student-li :studentList="studentList"></student-li>
+        </div>
+    </div>
+
+<script src="app.js"></script>
+</body>
+</html>
