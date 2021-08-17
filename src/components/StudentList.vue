@@ -24,15 +24,15 @@
             </tr>
             </tbody>
         </table>
-        <EditForm v-if="editing" :edit-data="editData" @onEdit="onEdit"/>
+        <AddForm v-if="editing" add_or_edit='Сохранить изменения' :edit-data="editData" @onEdit="onEdit" @submit.prevent="onAddOrEdit"/>
     </div>
 </template>
 
 <script>
-    import EditForm from "@/components/EditForm";
+    import AddForm from "@/components/AddForm.vue";
     export default {
         name: "StudentList",
-        components: {EditForm},
+        components: {AddForm},
         props: ['studentList'],
         data() {
             return {

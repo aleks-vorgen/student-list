@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="onAdd">
+    <form @submit.prevent="onAddOrEdit">
         <label for="name"><b>Имя</b></label>
         <input v-model="name" placeholder="Введите имя студента">
 
@@ -9,7 +9,7 @@
         <label for="course"><b>Курс</b></label>
         <input v-model="course" placeholder="Введите курс">
 
-        <button class="save-button" type="submit">Добавить</button>
+        <button class="save-button" type="submit">{{add_or_edit}}</button>
     </form>
 </template>
 
@@ -23,16 +23,42 @@
                 course: null
             }
         },
-
-
-        methods: {
-            onAdd() {
-                this.$emit('onAdd', {
-                    name: this.name,
-                    surname: this.surname,
-                    course: this.course
-                })
+        props: ['editData', 'add_or_edit'],
+        watch: {
+            // эта функция запускается при любом изменении
+            editData: function () {
+                this.name = this.editData.name;
+                this.surname = this.editData.surname;
+                this.course = this.editData.course;
             },
+        },
+        mounted() {
+            if(this.editData) {
+                this.name = this.editData.name;
+                this.surname = this.editData.surname;
+                this.course = this.editData.course;
+            }
+        },
+        methods: {
+            onAddOrEdit() {
+                if (this.add_or_edit === "Добавить") {
+                    this.$emit('onAdd', {
+                        name: this.name,
+                        surname: this.surname,
+                        course: this.course
+                    })
+                }
+                else if (this.add_or_edit === "Сохранить изменения") {
+                    this.editData.name = this.name;
+                    this.editData.surname = this.surname;
+                    this.editData.course = this.course;
+                    this.$emit('onEdit', {
+                        name: this.editData.name,
+                        surname: this.editData.surname,
+                        course: this.editData.course
+                    })
+                }
+            }
         }
     }
 </script>

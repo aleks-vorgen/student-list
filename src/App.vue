@@ -2,8 +2,8 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Add Student"/>
-    <Navigation @onFlag="isFlag"/>
-    <AddForm  v-if="flag" @onAdd="addStudent"/>
+    <Navigation @onFlag="isAdd"/>
+    <AddForm add_or_edit="Добавить" v-if="isEdit_flag" @onAdd="addStudent"/>
     <StudentList v-else :student-list="studentList" @onRemove="removeStudent" @onEdit="Edit"/>
   </div>
 </template>
@@ -24,7 +24,7 @@ export default {
   },
   data() {
     return {
-      flag: true,
+      isEdit_flag: false,
       studentList: [
         {name: 'admin', surname: 'admin', course: '123'},
         {name: 'admin2', surname: 'admin2', course: '321'}
@@ -38,8 +38,8 @@ export default {
     removeStudent(index) {
       this.studentList.splice(index, 1)
     },
-    isFlag(flag) {
-      this.flag = flag
+    isAdd(flag) {
+      this.isEdit_flag = flag
     },
     Edit(index, stud) {
       this.studentList[index] = stud

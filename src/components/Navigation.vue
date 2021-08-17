@@ -1,6 +1,6 @@
 <template>
     <div class="nav">
-        <button v-if="flag" @click="onFlag(false)" class="student-list-button">
+        <button v-if="isList_flag" @click="onFlag(false)" class="student-list-button">
             Список студентов
         </button>
         <button v-else @click="onFlag(true)" class="add-student-list-button">
@@ -14,13 +14,13 @@
         name: "Navigation",
         data() {
             return {
-                flag: true
+                isList_flag: false
             }
         },
         methods: {
-            onFlag(_flag) {
-                this.flag = _flag;
-                this.$emit('onFlag', this.flag)
+            onFlag(flag) {
+                this.isList_flag = flag;
+                this.$emit('onFlag', this.isList_flag)
             }
         }
     }
