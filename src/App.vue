@@ -1,7 +1,5 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Add Student"/>
     <Navigation @onFlag="isAdd"/>
     <AddForm add_or_edit="Добавить" v-if="isEdit_flag" @onAdd="addStudent"/>
     <StudentList v-else :student-list="studentList" @onRemove="removeStudent" @onEdit="Edit"/>
@@ -9,7 +7,6 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 import Navigation from './components/Navigation.vue'
 import AddForm from './components/AddForm.vue'
 import StudentList from './components/StudentList.vue'
@@ -17,7 +14,6 @@ import StudentList from './components/StudentList.vue'
 export default {
   name: 'App',
   components: {
-    HelloWorld,
     Navigation,
     AddForm,
     StudentList,
@@ -55,5 +51,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  margin: 50px;
 }
 </style>

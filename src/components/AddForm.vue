@@ -41,14 +41,14 @@
         },
         methods: {
             onAddOrEdit() {
-                if (this.add_or_edit === "Добавить") {
+                if (this.editData === undefined) {
                     this.$emit('onAdd', {
                         name: this.name,
                         surname: this.surname,
                         course: this.course
                     })
                 }
-                else if (this.add_or_edit === "Сохранить изменения") {
+                else {
                     this.editData.name = this.name;
                     this.editData.surname = this.surname;
                     this.editData.course = this.course;
